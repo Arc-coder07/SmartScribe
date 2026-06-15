@@ -1,6 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { createClient } from '@/lib/supabase/client';
 import {
   Settings as SettingsIcon,
   User,
@@ -36,6 +38,49 @@ const settingsSections = [
 ];
 
 export default function SettingsPage() {
+  const [user, setUser] = useState<{ email?: string; name?: string; initials?: string } | null>(null);
+  const [profile, setProfile] = useState<{ company_name?: string; industry?: string; company_description?: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (user) {
+          const name = user.user_metadata?.full_name || 'User';
+          const email = user.email || '';
+          const initials = name
+            .split(' ')
+            .map((n: string) => n[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2) || 'U';
+
+          setUser({ email, name, initials });
+
+          // Fetch onboarding profile for workspace details
+          const { data: profileData } = await supabase
+            .from('onboarding_profiles')
+            .select('company_name, industry, company_description')
+            .eq('user_id', user.id)
+            .single();
+
+          if (profileData) {
+            setProfile(profileData);
+          }
+        }
+      } catch (err) {
+        console.error('Error loading settings:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadSettings();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -63,11 +108,11 @@ export default function SettingsPage() {
         <div className="p-6 rounded-xl bg-surface/50 border border-border/50 space-y-4">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-brand/20 flex items-center justify-center text-xl font-bold text-brand-light">
-              AC
+              {isLoading ? '...' : user?.initials || 'U'}
             </div>
             <div>
-              <p className="font-medium">Alex Chen</p>
-              <p className="text-sm text-muted-foreground">alex@smartscribe.ai</p>
+              <p className="font-medium">{isLoading ? 'Loading...' : user?.name || 'User'}</p>
+              <p className="text-sm text-muted-foreground">{isLoading ? 'Loading...' : user?.email || ''}</p>
               <Button variant="outline" size="sm" className="h-7 text-xs mt-2">
                 Change Avatar
               </Button>
@@ -77,11 +122,11 @@ export default function SettingsPage() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm">Full Name</Label>
-              <Input id="name" defaultValue="Alex Chen" className="bg-surface border-border/50" />
+              <Input id="name" defaultValue={user?.name || ''} key={`name-${user?.name}`} className="bg-surface border-border/50" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm">Email</Label>
-              <Input id="email" defaultValue="alex@smartscribe.ai" className="bg-surface border-border/50" />
+              <Input id="email" defaultValue={user?.email || ''} key={`email-${user?.email}`} className="bg-surface border-border/50" />
             </div>
           </div>
         </div>
@@ -97,11 +142,11 @@ export default function SettingsPage() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm">Company Name</Label>
-              <Input defaultValue="TechVenture Solutions" className="bg-surface border-border/50" />
+              <Input defaultValue={profile?.company_name || ''} key={`company-${profile?.company_name}`} className="bg-surface border-border/50" />
             </div>
             <div className="space-y-2">
               <Label className="text-sm">Industry</Label>
-              <Select defaultValue="technology">
+              <Select defaultValue={profile?.industry?.toLowerCase() || "technology"} key={`ind-${profile?.industry}`}>
                 <SelectTrigger className="bg-surface border-border/50">
                   <SelectValue />
                 </SelectTrigger>
@@ -118,7 +163,7 @@ export default function SettingsPage() {
           </div>
           <div className="space-y-2">
             <Label className="text-sm">Business Description</Label>
-            <Input defaultValue="Full-stack digital transformation and software development consultancy" className="bg-surface border-border/50" />
+            <Input defaultValue={profile?.company_description || ''} key={`desc-${profile?.company_description}`} className="bg-surface border-border/50" />
           </div>
         </div>
       </section>

@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -57,6 +58,26 @@ export function Sidebar() {
   const pathname = usePathname();
   const sidebarCollapsed = useUIStore((s) => s.sidebarCollapsed);
   const toggleSidebar = useUIStore((s) => s.toggleSidebar);
+  const [user, setUser] = useState<{ name: string; email: string; initials: string } | null>(null);
+
+  useEffect(() => {
+    async function loadUser() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const name = user.user_metadata?.full_name || 'User';
+        const email = user.email || '';
+        const initials = name
+          .split(' ')
+          .map((n: string) => n[0])
+          .join('')
+          .toUpperCase()
+          .substring(0, 2) || 'U';
+        setUser({ name, email, initials });
+      }
+    }
+    loadUser();
+  }, []);
 
   const navItems = useMemo(
     () =>
@@ -80,23 +101,39 @@ export function Sidebar() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       {/* ── Logo ──────────────────────────────────────────────────────── */}
-      <div className="flex h-14 items-center gap-2.5 border-b border-border px-4">
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-lg gradient-brand">
-          <Sparkles className="size-4 text-foreground" />
+      <div className="flex h-14 items-center justify-between border-b border-border px-4 relative">
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg gradient-brand">
+            <Sparkles className="size-4 text-foreground" />
+          </div>
+          <AnimatePresence>
+            {!sidebarCollapsed && (
+              <motion.span
+                className="gradient-brand-text text-lg font-bold tracking-tight whitespace-nowrap"
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.15 }}
+              >
+                {APP_NAME}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
-        <AnimatePresence>
-          {!sidebarCollapsed && (
-            <motion.span
-              className="gradient-brand-text text-lg font-bold tracking-tight"
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -8 }}
-              transition={{ duration: 0.15 }}
-            >
-              {APP_NAME}
-            </motion.span>
+
+        <button
+          onClick={toggleSidebar}
+          className={cn(
+            'flex size-6 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground',
+            sidebarCollapsed ? 'absolute -right-3 top-4 z-50 bg-background border border-border rounded-full size-6 shadow-sm px-0' : ''
           )}
-        </AnimatePresence>
+        >
+          {sidebarCollapsed ? (
+            <ChevronsRight className="size-3.5" />
+          ) : (
+            <ChevronsLeft className="size-4" />
+          )}
+        </button>
       </div>
 
       {/* ── Navigation ────────────────────────────────────────────────── */}
@@ -189,14 +226,14 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* ── Bottom: User + Collapse Toggle ────────────────────────────── */}
+      {/* ── Bottom: User ────────────────────────────── */}
       <div className="border-t border-border p-3">
         {/* User */}
         <div className="flex items-center gap-3 rounded-lg px-3 py-2">
           <Avatar size="sm">
-            <AvatarImage src="" alt="Alex Chen" />
+            <AvatarImage src="" alt={user?.name || 'User'} />
             <AvatarFallback className="bg-brand/20 text-xs text-brand-light">
-              AC
+              {user?.initials || 'U'}
             </AvatarFallback>
           </Avatar>
           <AnimatePresence>
@@ -210,42 +247,15 @@ export function Sidebar() {
                 transition={{ duration: 0.15 }}
               >
                 <span className="truncate text-sm font-medium text-foreground">
-                  Alex Chen
+                  {user?.name || 'Loading...'}
                 </span>
                 <span className="truncate text-[11px] text-muted-foreground">
-                  Pro Plan
+                  {user?.email || '...'}
                 </span>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-
-        {/* Collapse toggle */}
-        <button
-          onClick={toggleSidebar}
-          className={cn(
-            'mt-1 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground/80',
-            sidebarCollapsed && 'px-0'
-          )}
-        >
-          {sidebarCollapsed ? (
-            <ChevronsRight className="size-4" />
-          ) : (
-            <>
-              <ChevronsLeft className="size-4" />
-              <motion.span
-                className="text-xs"
-                variants={labelVariants}
-                initial="hide"
-                animate="show"
-                exit="hide"
-                transition={{ duration: 0.15 }}
-              >
-                Collapse
-              </motion.span>
-            </>
-          )}
-        </button>
       </div>
     </motion.aside>
   );
