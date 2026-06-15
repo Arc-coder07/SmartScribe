@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { createClient } from '@/lib/supabase/client';
+import { useRouter } from 'next/navigation';
 import {
   Settings as SettingsIcon,
   User,
@@ -38,6 +39,7 @@ const settingsSections = [
 ];
 
 export default function SettingsPage() {
+  const router = useRouter();
   const [user, setUser] = useState<{ email?: string; name?: string; initials?: string } | null>(null);
   const [profile, setProfile] = useState<{ company_name?: string; industry?: string; company_description?: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +82,12 @@ export default function SettingsPage() {
 
     loadSettings();
   }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push('/login');
+  };
 
   return (
     <motion.div
@@ -261,9 +269,12 @@ export default function SettingsPage() {
       </section>
 
       {/* Save */}
-      <div className="flex justify-end gap-3 pt-4">
-        <Button variant="outline">Cancel</Button>
-        <Button className="bg-brand hover:bg-brand-light text-foreground">Save Changes</Button>
+      <div className="flex justify-between items-center pt-4">
+        <Button variant="destructive" onClick={handleSignOut}>Sign Out</Button>
+        <div className="flex gap-3">
+          <Button variant="outline">Cancel</Button>
+          <Button className="bg-brand hover:bg-brand-light text-foreground">Save Changes</Button>
+        </div>
       </div>
     </motion.div>
   );

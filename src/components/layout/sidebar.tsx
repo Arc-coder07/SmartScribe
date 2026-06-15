@@ -249,9 +249,6 @@ export function Sidebar() {
                 <span className="truncate text-sm font-medium text-foreground">
                   {user?.name || 'Loading...'}
                 </span>
-                <span className="truncate text-[11px] text-muted-foreground">
-                  {user?.email || '...'}
-                </span>
               </motion.div>
             )}
           </AnimatePresence>

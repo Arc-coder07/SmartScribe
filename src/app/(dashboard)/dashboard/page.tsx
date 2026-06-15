@@ -1,6 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { createClient } from '@/lib/supabase/client';
 import { StatsCards } from '@/components/dashboard/stats-cards';
 import { Charts } from '@/components/dashboard/charts';
 import { QuickActions } from '@/components/dashboard/quick-actions';
@@ -32,6 +34,20 @@ const pageVariants = {
 // ─── Page Component ─────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    async function loadUser() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const name = user.user_metadata?.full_name?.split(' ')[0] || 'User';
+        setUserName(name);
+      }
+    }
+    loadUser();
+  }, []);
+
   return (
     <motion.div
       className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8"
@@ -42,7 +58,7 @@ export default function DashboardPage() {
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          {getGreeting()}, Alex
+          {getGreeting()}, {userName || '...'}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Here&apos;s what&apos;s happening with your documents
