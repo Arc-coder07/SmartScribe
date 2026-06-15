@@ -138,7 +138,7 @@ export function DocumentComments({ comments }: DocumentCommentsProps) {
           </Button>
           <Button
             size="sm"
-            className="h-7 text-xs gap-1 bg-brand hover:bg-brand-light text-white"
+            className="h-7 text-xs gap-1 bg-brand hover:bg-brand-light text-foreground"
             disabled={!newComment.trim()}
           >
             <Send className="h-3 w-3" />

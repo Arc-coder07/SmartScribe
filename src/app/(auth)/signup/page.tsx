@@ -140,14 +140,14 @@ export default function SignupPage() {
     <>
       <style dangerouslySetInnerHTML={{ __html: floatingShapeStyles }} />
 
-      <div className="flex min-h-screen w-full bg-[#09090B]">
+      <div className="flex min-h-screen w-full bg-background">
         {/* ─── Left Panel: Branding ─────────────────────────────────────── */}
         <div className="relative hidden w-[60%] overflow-hidden lg:flex lg:flex-col lg:justify-between lg:p-12">
           {/* Animated gradient background */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(135deg, #09090B 0%, #1a0b2e 30%, #0f172a 60%, #09090B 100%)',
+              background: 'linear-gradient(135deg, var(--background) 0%, #1a0b2e 30%, #0f172a 60%, var(--background) 100%)',
               backgroundSize: '400% 400%',
               animation: 'gradient-shift 15s ease infinite',
             }}
@@ -179,14 +179,14 @@ export default function SignupPage() {
           >
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-brand">
-                <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 19l7-7 3 3-7 7-3-3z" />
                   <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
                   <path d="M2 2l7.586 7.586" />
                   <circle cx="11" cy="11" r="2" />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-white">SmartScribe</span>
+              <span className="text-xl font-bold text-foreground">SmartScribe</span>
             </div>
           </motion.div>
 
@@ -198,11 +198,11 @@ export default function SignupPage() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-5xl font-bold leading-tight tracking-tight">
-              <span className="text-white">Start creating</span>
+              <span className="text-foreground">Start creating</span>
               <br />
               <span className="gradient-brand-text">extraordinary content.</span>
             </h1>
-            <p className="mt-4 text-lg text-zinc-400 leading-relaxed">
+            <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
               Join thousands of writers, marketers, and teams who use SmartScribe to produce their best work.
             </p>
           </motion.div>
@@ -217,16 +217,16 @@ export default function SignupPage() {
             <div className="glass-subtle rounded-2xl p-6 max-w-md">
               <div className="grid grid-cols-3 gap-6">
                 <div>
-                  <p className="text-2xl font-bold text-white">50K+</p>
-                  <p className="text-xs text-zinc-500 mt-1">Active writers</p>
+                  <p className="text-2xl font-bold text-foreground">50K+</p>
+                  <p className="text-xs text-muted-foreground mt-1">Active writers</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">2M+</p>
-                  <p className="text-xs text-zinc-500 mt-1">Documents created</p>
+                  <p className="text-2xl font-bold text-foreground">2M+</p>
+                  <p className="text-xs text-muted-foreground mt-1">Documents created</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">99.9%</p>
-                  <p className="text-xs text-zinc-500 mt-1">Uptime</p>
+                  <p className="text-2xl font-bold text-foreground">99.9%</p>
+                  <p className="text-xs text-muted-foreground mt-1">Uptime</p>
                 </div>
               </div>
             </div>
@@ -243,14 +243,14 @@ export default function SignupPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-brand">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 19l7-7 3 3-7 7-3-3z" />
                 <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
                 <path d="M2 2l7.586 7.586" />
                 <circle cx="11" cy="11" r="2" />
               </svg>
             </div>
-            <span className="text-xl font-bold text-white">SmartScribe</span>
+            <span className="text-xl font-bold text-foreground">SmartScribe</span>
           </motion.div>
 
           <motion.div
@@ -261,10 +261,10 @@ export default function SignupPage() {
           >
             {/* Header */}
             <motion.div variants={itemVariants} className="mb-8">
-              <h2 className="text-2xl font-bold tracking-tight text-white">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 Create your account
               </h2>
-              <p className="mt-2 text-sm text-zinc-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Start your free trial — no credit card required
               </p>
             </motion.div>
@@ -273,59 +273,59 @@ export default function SignupPage() {
             <div className="space-y-4">
               {/* Full Name */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <Label htmlFor="name" className="text-zinc-300">
+                <Label htmlFor="name" className="text-muted-foreground">
                   Full name
                 </Label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
-                    className="h-11 pl-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                 </div>
               </motion.div>
 
               {/* Email */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <Label htmlFor="email" className="text-zinc-300">
+                <Label htmlFor="email" className="text-muted-foreground">
                   Email address
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="h-11 pl-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                 </div>
               </motion.div>
 
               {/* Password */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <Label htmlFor="password" className="text-zinc-300">
+                <Label htmlFor="password" className="text-muted-foreground">
                   Password
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Min. 8 characters"
-                    className="h-11 pl-10 pr-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 pr-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground transition-colors"
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -334,19 +334,19 @@ export default function SignupPage() {
 
               {/* Company Name */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <Label htmlFor="company" className="text-zinc-300">
+                <Label htmlFor="company" className="text-muted-foreground">
                   Company name
                   <span className="text-zinc-600 font-normal ml-1">(optional)</span>
                 </Label>
                 <div className="relative">
-                  <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="company"
                     type="text"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     placeholder="Acme Inc."
-                    className="h-11 pl-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                 </div>
               </motion.div>
@@ -362,7 +362,7 @@ export default function SignupPage() {
                 <Button
                   onClick={handleCreateAccount}
                   disabled={loading}
-                  className="h-11 w-full gradient-brand border-0 text-white font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
+                  className="h-11 w-full gradient-brand border-0 text-foreground font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
                   size="lg"
                 >
                   {loading ? 'Creating account...' : 'Create account'}
@@ -372,11 +372,11 @@ export default function SignupPage() {
               {/* Terms */}
               <motion.p variants={itemVariants} className="text-xs text-zinc-600 text-center leading-relaxed">
                 By creating an account, you agree to our{' '}
-                <button className="text-zinc-400 hover:text-zinc-300 underline underline-offset-2 transition-colors">
+                <button className="text-muted-foreground hover:text-muted-foreground underline underline-offset-2 transition-colors">
                   Terms of Service
                 </button>{' '}
                 and{' '}
-                <button className="text-zinc-400 hover:text-zinc-300 underline underline-offset-2 transition-colors">
+                <button className="text-muted-foreground hover:text-muted-foreground underline underline-offset-2 transition-colors">
                   Privacy Policy
                 </button>
               </motion.p>
@@ -384,7 +384,7 @@ export default function SignupPage() {
               {/* Divider */}
               <motion.div variants={itemVariants} className="relative flex items-center gap-4 py-1">
                 <div className="h-px flex-1 bg-white/[0.08]" />
-                <span className="text-xs text-zinc-500 uppercase tracking-wider">or continue with</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">or continue with</span>
                 <div className="h-px flex-1 bg-white/[0.08]" />
               </motion.div>
 
@@ -392,7 +392,7 @@ export default function SignupPage() {
               <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
-                  className="h-11 border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-zinc-300 gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GoogleIcon />
@@ -400,7 +400,7 @@ export default function SignupPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="h-11 border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-zinc-300 gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GitHubIcon />
@@ -409,11 +409,11 @@ export default function SignupPage() {
               </motion.div>
 
               {/* Sign in link */}
-              <motion.p variants={itemVariants} className="text-center text-sm text-zinc-500 pt-2">
+              <motion.p variants={itemVariants} className="text-center text-sm text-muted-foreground pt-2">
                 Already have an account?{' '}
                 <Link
                   href="/login"
-                  className="text-[#7C3AED] hover:text-[#8B5CF6] font-medium transition-colors"
+                  className="text-[#10a37f] hover:text-[#12b78e] font-medium transition-colors"
                 >
                   Sign in
                 </Link>

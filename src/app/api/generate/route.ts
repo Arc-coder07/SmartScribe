@@ -1,6 +1,7 @@
 import { generateObject, generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { checkRateLimit } from '@/lib/api/rate-limit';
+import { buildAIContext, buildSystemPrompt } from '@/lib/ai/context-engine';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -11,7 +12,7 @@ const groq = createOpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { prompt, type, vaultContext } = await req.json();
+    const { prompt, type, templateId, clientId, documentContent } = await req.json();
 
     const estimatedTokens = Math.ceil((prompt?.length || 0) / 4) + 1500; 
     const { allowed, remaining } = await checkRateLimit(estimatedTokens);
@@ -20,12 +21,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: `Rate limit exceeded. Remaining tokens: ${remaining}` }, { status: 429 });
     }
 
-    const systemPrompt = `You are SmartScribe AI, a world-class business document generator.
-    You have access to the following business knowledge vault context about this company:
-    ---
-    ${vaultContext || 'No specific vault context provided.'}
-    ---
-    Use this knowledge to personalize the document seamlessly without sounding robotic.`;
+    // Build full context from memory, vault, template, and client data
+    const context = await buildAIContext({
+      includeMemory: true,
+      includeVault: true,
+      templateId,
+      clientId,
+      documentContent,
+    });
+
+    const systemPrompt = buildSystemPrompt(context, type);
 
     if (type === 'health-score') {
       const result = await generateObject({
@@ -70,10 +75,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ content: result.text });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'An error occurred during generation.';
     console.error('Generate API Error:', error);
     return NextResponse.json(
-      { error: error.message || 'An error occurred during generation.' },
+      { error: message },
       { status: 500 }
     );
   }

@@ -117,7 +117,7 @@ export function CommandPalette() {
               transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
               <Command
-                className="rounded-xl border border-white/[0.08] bg-[#111113] shadow-2xl shadow-black/40 overflow-hidden"
+                className="rounded-xl border border-border bg-[#111113] shadow-2xl shadow-black/40 overflow-hidden"
                 loop
               >
                 {/* Search Input */}
@@ -125,7 +125,7 @@ export function CommandPalette() {
                   <Search className="h-4 w-4 text-muted-foreground shrink-0" />
                   <Command.Input
                     placeholder="Type a command or search..."
-                    className="flex-1 h-12 bg-transparent text-sm text-white placeholder:text-[#71717A] outline-none"
+                    className="flex-1 h-12 bg-transparent text-sm text-foreground placeholder:text-[#71717A] outline-none"
                     autoFocus
                   />
                   <kbd className="hidden sm:flex h-5 items-center rounded bg-white/[0.06] px-1.5 font-mono text-[10px] text-[#71717A]">
@@ -149,7 +149,7 @@ export function CommandPalette() {
                         <Command.Item
                           key={item.label}
                           onSelect={item.onSelect}
-                          className="flex items-center gap-3 px-2 py-2.5 rounded-lg text-sm text-white/80 cursor-pointer transition-colors aria-selected:bg-white/[0.06] aria-selected:text-white hover:bg-white/[0.04]"
+                          className="flex items-center gap-3 px-2 py-2.5 rounded-lg text-sm text-foreground/80 cursor-pointer transition-colors aria-selected:bg-white/[0.06] aria-selected:text-foreground hover:bg-muted/50"
                         >
                           <item.icon className="h-4 w-4 text-[#71717A]" />
                           <span className="flex-1">{item.label}</span>

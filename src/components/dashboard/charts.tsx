@@ -103,8 +103,8 @@ export function Charts() {
             >
               <defs>
                 <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#7C3AED" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#7C3AED" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#10a37f" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#10a37f" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <XAxis
@@ -124,14 +124,14 @@ export function Charts() {
               <Area
                 type="monotone"
                 dataKey="count"
-                stroke="#7C3AED"
+                stroke="#10a37f"
                 strokeWidth={2}
                 fill="url(#areaGradient)"
                 dot={false}
                 activeDot={{
                   r: 4,
-                  fill: '#7C3AED',
-                  stroke: '#09090B',
+                  fill: '#10a37f',
+                  stroke: 'var(--background)',
                   strokeWidth: 2,
                 }}
               />

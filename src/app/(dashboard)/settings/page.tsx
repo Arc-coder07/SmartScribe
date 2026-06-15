@@ -218,7 +218,7 @@ export default function SettingsPage() {
       {/* Save */}
       <div className="flex justify-end gap-3 pt-4">
         <Button variant="outline">Cancel</Button>
-        <Button className="bg-brand hover:bg-brand-light text-white">Save Changes</Button>
+        <Button className="bg-brand hover:bg-brand-light text-foreground">Save Changes</Button>
       </div>
     </motion.div>
   );

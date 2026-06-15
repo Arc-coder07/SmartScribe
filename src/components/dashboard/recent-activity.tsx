@@ -21,7 +21,7 @@ const activityTypeConfig: Record<
 > = {
   created: {
     icon: FilePlus,
-    color: '#7C3AED',
+    color: '#10a37f',
     dotColor: 'bg-purple-500',
   },
   edited: {
@@ -173,7 +173,7 @@ export function RecentActivity() {
             <motion.div
               key={activity.id}
               variants={itemVariants}
-              className="group flex items-start gap-3 px-5 py-3.5 transition-colors hover:bg-white/[0.02]"
+              className="group flex items-start gap-3 px-5 py-3.5 transition-colors hover:bg-muted/30"
             >
               {/* Dot indicator */}
               <div className="relative mt-1.5 flex-shrink-0">

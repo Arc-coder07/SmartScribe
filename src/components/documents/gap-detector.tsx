@@ -73,7 +73,7 @@ export function GapDetector({ gaps }: GapDetectorProps) {
         {unresolvedGaps.length > 0 && (
           <Button
             size="sm"
-            className="h-7 text-xs gap-1.5 bg-brand hover:bg-brand-light text-white"
+            className="h-7 text-xs gap-1.5 bg-brand hover:bg-brand-light text-foreground"
           >
             <Sparkles className="h-3 w-3" />
             Fix All

@@ -9,7 +9,7 @@ export const DOCUMENT_TYPE_META: Record<
   proposal: {
     label: 'Proposal',
     icon: 'FileText',
-    color: '#7C3AED',
+    color: '#10a37f',
     description: 'Business proposals and pitches',
   },
   invoice: {
@@ -39,7 +39,7 @@ export const DOCUMENT_TYPE_META: Record<
   'meeting-summary': {
     label: 'Meeting Summary',
     icon: 'Users',
-    color: '#8B5CF6',
+    color: '#12b78e',
     description: 'Meeting notes and summaries',
   },
   'client-update': {
@@ -65,7 +65,7 @@ export const VAULT_CATEGORY_META: Record<
   company: {
     label: 'Company Details',
     icon: 'Building2',
-    color: '#7C3AED',
+    color: '#10a37f',
     description: 'Company information and branding',
   },
   team: {
@@ -95,7 +95,7 @@ export const VAULT_CATEGORY_META: Record<
   brand: {
     label: 'Brand Voice',
     icon: 'Palette',
-    color: '#8B5CF6',
+    color: '#12b78e',
     description: 'Brand guidelines and tone',
   },
 };
@@ -107,7 +107,8 @@ export const NAV_ITEMS = [
   { label: 'Documents', href: '/documents', icon: 'FileText', shortcut: '⌘2' },
   { label: 'Templates', href: '/templates', icon: 'LayoutTemplate', shortcut: '⌘3' },
   { label: 'Knowledge Vault', href: '/vault', icon: 'Database', shortcut: '⌘4' },
-  { label: 'Analytics', href: '/analytics', icon: 'BarChart3', shortcut: '⌘5' },
+  { label: 'Clients', href: '/clients', icon: 'Users', shortcut: '⌘5' },
+  { label: 'Analytics', href: '/analytics', icon: 'BarChart3', shortcut: '⌘6' },
   { label: 'Settings', href: '/settings', icon: 'Settings', shortcut: '⌘,' },
 ] as const;
 

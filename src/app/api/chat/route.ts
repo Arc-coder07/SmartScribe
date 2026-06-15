@@ -1,6 +1,7 @@
 import { streamText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
 import { checkRateLimit } from '@/lib/api/rate-limit';
+import { buildAIContext, buildSystemPrompt } from '@/lib/ai/context-engine';
 import { NextResponse } from 'next/server';
 
 // Configure the Groq client using the OpenAI compatibility layer
@@ -11,11 +12,11 @@ const groq = createOpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, documentContent } = await req.json();
 
     // Estimate tokens: roughly 4 chars per token. Very rough heuristic.
     // Adding 500 for the expected completion.
-    const estimatedPromptLength = messages.reduce((acc: number, m: any) => acc + (m.content?.length || 0), 0);
+    const estimatedPromptLength = messages.reduce((acc: number, m: { content?: string }) => acc + (m.content?.length || 0), 0);
     const estimatedTokens = Math.ceil(estimatedPromptLength / 4) + 500; 
 
     // Check rate limits
@@ -28,20 +29,27 @@ export async function POST(req: Request) {
       );
     }
 
+    // Build full context from memory + vault
+    const context = await buildAIContext({
+      includeMemory: true,
+      includeVault: true,
+      documentContent,
+    });
+
+    const systemPrompt = buildSystemPrompt(context);
+
     const result = await streamText({
       model: groq('openai/gpt-oss-20b'),
-      system: `You are SmartScribe AI, an intelligent business document operating system assistant. 
-      You help users generate, improve, and manage highly professional business documents. 
-      Always maintain a highly professional, expert tone. 
-      Format responses cleanly with markdown, bullet points, and headers where applicable.`,
+      system: systemPrompt,
       messages,
     });
 
     return result.toTextStreamResponse();
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'An error occurred during chat generation.';
     console.error('Chat API Error:', error);
     return NextResponse.json(
-      { error: error.message || 'An error occurred during chat generation.' },
+      { error: message },
       { status: 500 }
     );
   }

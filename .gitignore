@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+docs/supabase-schema.sql
+docs/PRODUCT_SPEC.md

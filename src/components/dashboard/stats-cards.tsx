@@ -11,7 +11,7 @@ const stats = [
     value: '47',
     change: '+12%',
     icon: FileText,
-    iconColor: '#7C3AED',
+    iconColor: '#10a37f',
     iconBg: 'rgba(124, 58, 237, 0.15)',
   },
   {

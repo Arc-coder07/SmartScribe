@@ -52,7 +52,7 @@ const SUGGESTION_TYPE_META: Record<
   HealthSuggestion['category'],
   { icon: typeof Sparkles; color: string }
 > = {
-  professionalism: { icon: MessageSquare, color: '#7C3AED' },
+  professionalism: { icon: MessageSquare, color: '#10a37f' },
   readability: { icon: Lightbulb, color: '#3B82F6' },
   completeness: { icon: Zap, color: '#F59E0B' },
   conversion: { icon: HeartPulse, color: '#EF4444' },
@@ -94,15 +94,15 @@ export function CopilotPanel() {
           <div className="flex h-14 items-center justify-between border-b border-white/[0.06] px-4">
             <div className="flex items-center gap-2">
               <div className="flex size-7 items-center justify-center rounded-md gradient-brand">
-                <Sparkles className="size-3.5 text-white" />
+                <Sparkles className="size-3.5 text-foreground" />
               </div>
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-foreground">
                 AI Copilot
               </span>
             </div>
             <button
               onClick={toggleCopilot}
-              className="flex size-7 items-center justify-center rounded-md text-[#71717A] transition-colors hover:bg-white/[0.06] hover:text-white"
+              className="flex size-7 items-center justify-center rounded-md text-[#71717A] transition-colors hover:bg-white/[0.06] hover:text-foreground"
             >
               <X className="size-4" />
             </button>
@@ -110,7 +110,7 @@ export function CopilotPanel() {
 
           {/* ── Tabs Content ───────────────────────────────────────── */}
           <Tabs defaultValue="chat" className="flex flex-1 flex-col overflow-hidden">
-            <TabsList className="mx-4 mt-3 w-auto bg-white/[0.04]">
+            <TabsList className="mx-4 mt-3 w-auto bg-muted/50">
               <TabsTrigger value="chat" className="gap-1.5 text-xs">
                 <MessageSquare className="size-3.5" />
                 Chat
@@ -233,8 +233,8 @@ function ChatTab() {
               className={cn(
                 'max-w-[85%] rounded-xl px-3.5 py-2.5 text-[13px] leading-relaxed',
                 message.role === 'user'
-                  ? 'bg-brand/20 text-white'
-                  : 'bg-white/[0.04] text-white/85'
+                  ? 'bg-brand/20 text-foreground'
+                  : 'bg-muted/50 text-foreground/85'
               )}
             >
               {message.content}
@@ -243,7 +243,7 @@ function ChatTab() {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-white/[0.04] text-white/85 max-w-[85%] rounded-xl px-3.5 py-2.5 text-[13px] leading-relaxed">
+            <div className="bg-muted/50 text-foreground/85 max-w-[85%] rounded-xl px-3.5 py-2.5 text-[13px] leading-relaxed">
               ...
             </div>
           </div>
@@ -252,19 +252,19 @@ function ChatTab() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-white/[0.04] p-4 bg-[#09090B]">
+      <div className="border-t border-white/[0.04] p-4 bg-background">
         <form onSubmit={handleSubmit} className="relative">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask AI anything..."
-            className="h-10 bg-white/[0.04] border-white/[0.08] pr-10 text-xs text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+            className="h-10 bg-muted/50 border-border pr-10 text-xs text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
             disabled={isLoading}
           />
           <Button
             type="submit"
             size="icon"
-            className="absolute right-1 top-1 h-8 w-8 bg-transparent text-zinc-500 hover:bg-white/[0.04] hover:text-white"
+            className="absolute right-1 top-1 h-8 w-8 bg-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             disabled={!input.trim() || isLoading}
           >
             <Send className="size-4" />
@@ -313,7 +313,7 @@ function SuggestionsTab() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-3.5 transition-colors hover:bg-white/[0.04]"
+            className="group rounded-xl border border-white/[0.06] bg-muted/30 p-3.5 transition-colors hover:bg-muted/50"
             style={{ borderLeftWidth: 3, borderLeftColor: meta.color }}
           >
             {/* Header */}
@@ -328,7 +328,7 @@ function SuggestionsTab() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <h4 className="text-sm font-medium text-white capitalize">
+                <h4 className="text-sm font-medium text-foreground capitalize">
                   {suggestion.category} Suggestion
                 </h4>
                 <p className="mt-0.5 text-xs leading-relaxed text-[#71717A]">
@@ -348,7 +348,7 @@ function SuggestionsTab() {
               </button>
               <button
                 onClick={() => handleDismiss(suggestion.id)}
-                className="flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-[#71717A] transition-colors hover:bg-white/[0.04] hover:text-white/70"
+                className="flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-[#71717A] transition-colors hover:bg-muted/50 hover:text-foreground/70"
               >
                 <XIcon className="size-3" />
                 Dismiss
@@ -363,7 +363,7 @@ function SuggestionsTab() {
           <div className="flex size-12 items-center justify-center rounded-full bg-success/10">
             <Check className="size-5 text-success" />
           </div>
-          <p className="mt-3 text-sm font-medium text-white">All caught up!</p>
+          <p className="mt-3 text-sm font-medium text-foreground">All caught up!</p>
           <p className="mt-1 text-xs text-[#71717A]">
             No pending suggestions for this document.
           </p>
@@ -447,7 +447,7 @@ function HealthTab() {
           {/* Score text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <motion.span
-              className="text-3xl font-bold text-white"
+              className="text-3xl font-bold text-foreground"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
@@ -467,7 +467,7 @@ function HealthTab() {
         {categories.map(({ label, score }) => (
           <div key={label} className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-white/80">{label}</span>
+              <span className="text-sm text-foreground/80">{label}</span>
               <span
                 className="text-sm font-medium"
                 style={{ color: getHealthColor(score) }}

@@ -14,6 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/lib/stores/ui-store';
 import { NAV_ITEMS } from '@/lib/constants';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -52,7 +53,7 @@ export function Topbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-30 flex h-14 shrink-0 items-center justify-between gap-4 border-b border-white/[0.04] px-6',
+        'sticky top-0 z-30 flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border px-6',
         'glass-subtle'
       )}
     >
@@ -61,14 +62,14 @@ export function Topbar() {
         {breadcrumbs.map((crumb, index) => (
           <div key={crumb.href} className="flex items-center gap-1">
             {index > 0 && (
-              <ChevronRight className="size-3.5 text-[#71717A]" />
+              <ChevronRight className="size-3.5 text-muted-foreground" />
             )}
             <span
               className={cn(
                 'transition-colors',
                 index === breadcrumbs.length - 1
-                  ? 'font-medium text-white'
-                  : 'text-[#71717A] hover:text-white/70'
+                  ? 'font-medium text-foreground'
+                  : 'text-muted-foreground hover:text-foreground/70'
               )}
             >
               {crumb.label}
@@ -83,27 +84,30 @@ export function Topbar() {
         <button
           onClick={toggleSearch}
           className={cn(
-            'flex items-center gap-2 rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-1.5 text-sm text-[#71717A] transition-all',
-            'hover:border-white/[0.1] hover:bg-white/[0.05] hover:text-white/70'
+            'flex items-center gap-2 rounded-lg border border-border bg-muted/30 px-3 py-1.5 text-sm text-muted-foreground transition-all',
+            'hover:border-border/80 hover:bg-muted/50 hover:text-foreground/70'
           )}
         >
           <Search className="size-3.5" />
           <span className="hidden sm:inline">Search</span>
-          <kbd className="ml-1 hidden rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] sm:inline-block">
+          <kbd className="ml-1 hidden rounded bg-muted/50 px-1.5 py-0.5 font-mono text-[10px] sm:inline-block">
             ⌘K
           </kbd>
         </button>
 
+        {/* Theme Toggle */}
+        <ThemeToggle />
+
         {/* Notifications */}
         <button
           className={cn(
-            'relative flex size-8 items-center justify-center rounded-lg text-[#71717A] transition-colors',
-            'hover:bg-white/[0.04] hover:text-white/80'
+            'relative flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors',
+            'hover:bg-muted hover:text-foreground'
           )}
         >
           <Bell className="size-4" />
           {/* Badge dot */}
-          <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-brand ring-2 ring-[#0a0a0c]" />
+          <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-brand ring-2 ring-background" />
         </button>
 
         {/* User Avatar Dropdown */}
@@ -111,7 +115,7 @@ export function Topbar() {
           <DropdownMenuTrigger
             className={cn(
               'flex size-8 items-center justify-center rounded-lg transition-colors',
-              'hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand/50'
+              'hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand/50'
             )}
           >
             <Avatar size="sm">

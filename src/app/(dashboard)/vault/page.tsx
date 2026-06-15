@@ -67,7 +67,7 @@ export default function VaultPage() {
             Your business memory — AI uses this context across all documents.
           </p>
         </div>
-        <Button className="bg-brand hover:bg-brand-light text-white gap-2">
+        <Button className="bg-brand hover:bg-brand-light text-foreground gap-2">
           <Plus className="h-4 w-4" />
           Add Entry
         </Button>

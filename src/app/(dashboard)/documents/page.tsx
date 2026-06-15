@@ -79,7 +79,7 @@ export default function DocumentsPage() {
             {documents.length} documents in your workspace
           </p>
         </div>
-        <Button className="bg-brand hover:bg-brand-light text-white gap-2">
+        <Button className="bg-brand hover:bg-brand-light text-foreground gap-2">
           <Plus className="h-4 w-4" />
           New Document
         </Button>
@@ -226,7 +226,7 @@ export default function DocumentsPage() {
                 ? 'Try adjusting your filters to find what you\'re looking for.'
                 : 'Get started by creating your first document with AI assistance.'}
             </p>
-            <Button className="bg-brand hover:bg-brand-light text-white gap-2">
+            <Button className="bg-brand hover:bg-brand-light text-foreground gap-2">
               <Plus className="h-4 w-4" />
               Create Document
             </Button>

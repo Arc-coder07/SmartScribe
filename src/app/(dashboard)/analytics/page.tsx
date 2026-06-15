@@ -98,7 +98,7 @@ export default function AnalyticsPage() {
       {/* Quick Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Documents', value: '47', change: '+12%', up: true, icon: FileText, color: '#7C3AED' },
+          { label: 'Total Documents', value: '47', change: '+12%', up: true, icon: FileText, color: '#10a37f' },
           { label: 'AI Prompts Used', value: '182', change: '+24%', up: true, icon: Sparkles, color: '#3B82F6' },
           { label: 'Hours Saved', value: '23.5h', change: '+18%', up: true, icon: Clock, color: '#10B981' },
           { label: 'Avg Health Score', value: '87', change: '+6%', up: true, icon: TrendingUp, color: '#F59E0B' },
@@ -140,15 +140,15 @@ export default function AnalyticsPage() {
               <AreaChart data={weeklyData}>
                 <defs>
                   <linearGradient id="docGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#7C3AED" stopOpacity={0.3} />
-                    <stop offset="100%" stopColor="#7C3AED" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#10a37f" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#10a37f" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                 <XAxis dataKey="week" tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="documents" name="Documents" stroke="#7C3AED" fill="url(#docGradient)" strokeWidth={2} />
+                <Area type="monotone" dataKey="documents" name="Documents" stroke="#10a37f" fill="url(#docGradient)" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
           </div>

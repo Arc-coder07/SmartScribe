@@ -130,14 +130,14 @@ export default function LoginPage() {
     <>
       <style dangerouslySetInnerHTML={{ __html: floatingShapeStyles }} />
 
-      <div className="flex min-h-screen w-full bg-[#09090B]">
+      <div className="flex min-h-screen w-full bg-background">
         {/* ─── Left Panel: Branding ─────────────────────────────────────── */}
         <div className="relative hidden w-[60%] overflow-hidden lg:flex lg:flex-col lg:justify-between lg:p-12">
           {/* Animated gradient background */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(135deg, #09090B 0%, #1a0b2e 30%, #0f172a 60%, #09090B 100%)',
+              background: 'linear-gradient(135deg, var(--background) 0%, #1a0b2e 30%, #0f172a 60%, var(--background) 100%)',
               backgroundSize: '400% 400%',
               animation: 'gradient-shift 15s ease infinite',
             }}
@@ -169,14 +169,14 @@ export default function LoginPage() {
           >
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-brand">
-                <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 19l7-7 3 3-7 7-3-3z" />
                   <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
                   <path d="M2 2l7.586 7.586" />
                   <circle cx="11" cy="11" r="2" />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-white">SmartScribe</span>
+              <span className="text-xl font-bold text-foreground">SmartScribe</span>
             </div>
           </motion.div>
 
@@ -188,11 +188,11 @@ export default function LoginPage() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-5xl font-bold leading-tight tracking-tight">
-              <span className="text-white">Write smarter.</span>
+              <span className="text-foreground">Write smarter.</span>
               <br />
               <span className="gradient-brand-text">Think faster.</span>
             </h1>
-            <p className="mt-4 text-lg text-zinc-400 leading-relaxed">
+            <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
               AI-powered writing workspace that transforms your ideas into polished content, effortlessly.
             </p>
           </motion.div>
@@ -205,16 +205,16 @@ export default function LoginPage() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <div className="glass-subtle rounded-2xl p-6 max-w-md">
-              <p className="text-sm text-zinc-300 leading-relaxed italic">
+              <p className="text-sm text-muted-foreground leading-relaxed italic">
                 &ldquo;SmartScribe has completely transformed how our team creates content. What used to take hours now takes minutes, with better quality than ever.&rdquo;
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full gradient-brand text-xs font-bold text-white">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full gradient-brand text-xs font-bold text-foreground">
                   SR
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-white">Sarah Reynolds</p>
-                  <p className="text-xs text-zinc-500">Head of Content, Vercel</p>
+                  <p className="text-sm font-medium text-foreground">Sarah Reynolds</p>
+                  <p className="text-xs text-muted-foreground">Head of Content, Vercel</p>
                 </div>
               </div>
             </div>
@@ -231,14 +231,14 @@ export default function LoginPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-brand">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 19l7-7 3 3-7 7-3-3z" />
                 <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
                 <path d="M2 2l7.586 7.586" />
                 <circle cx="11" cy="11" r="2" />
               </svg>
             </div>
-            <span className="text-xl font-bold text-white">SmartScribe</span>
+            <span className="text-xl font-bold text-foreground">SmartScribe</span>
           </motion.div>
 
           <motion.div
@@ -249,10 +249,10 @@ export default function LoginPage() {
           >
             {/* Header */}
             <motion.div variants={itemVariants} className="mb-8">
-              <h2 className="text-2xl font-bold tracking-tight text-white">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 Welcome back
               </h2>
-              <p className="mt-2 text-sm text-zinc-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Sign in to your workspace
               </p>
             </motion.div>
@@ -261,18 +261,18 @@ export default function LoginPage() {
             <div className="space-y-5">
               {/* Email */}
               <motion.div variants={itemVariants} className="space-y-2">
-                <Label htmlFor="email" className="text-zinc-300">
+                <Label htmlFor="email" className="text-muted-foreground">
                   Email address
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="h-11 pl-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                 </div>
               </motion.div>
@@ -280,27 +280,27 @@ export default function LoginPage() {
               {/* Password */}
               <motion.div variants={itemVariants} className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-zinc-300">
+                  <Label htmlFor="password" className="text-muted-foreground">
                     Password
                   </Label>
-                  <button className="text-xs text-[#7C3AED] hover:text-[#8B5CF6] transition-colors">
+                  <button className="text-xs text-[#10a37f] hover:text-[#12b78e] transition-colors">
                     Forgot password?
                   </button>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="h-11 pl-10 pr-10 bg-white/[0.04] border-white/[0.08] text-white placeholder:text-zinc-600 focus-visible:border-[#7C3AED]/50 focus-visible:ring-[#7C3AED]/20"
+                    className="h-11 pl-10 pr-10 bg-muted/50 border-border text-foreground placeholder:text-zinc-600 focus-visible:border-[#10a37f]/50 focus-visible:ring-[#10a37f]/20"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground transition-colors"
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -316,19 +316,19 @@ export default function LoginPage() {
                   onClick={() => setRememberMe(!rememberMe)}
                   className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all ${
                     rememberMe
-                      ? 'border-[#7C3AED] bg-[#7C3AED]'
-                      : 'border-white/20 bg-white/[0.04] hover:border-white/30'
+                      ? 'border-[#10a37f] bg-[#10a37f]'
+                      : 'border-white/20 bg-muted/50 hover:border-white/30'
                   }`}
                 >
                   {rememberMe && (
-                    <svg className="h-3 w-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="h-3 w-3 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   )}
                 </button>
                 <label
                   onClick={() => setRememberMe(!rememberMe)}
-                  className="text-sm text-zinc-400 cursor-pointer select-none"
+                  className="text-sm text-muted-foreground cursor-pointer select-none"
                 >
                   Remember me
                 </label>
@@ -345,7 +345,7 @@ export default function LoginPage() {
                 <Button
                   onClick={handleSignIn}
                   disabled={loading}
-                  className="h-11 w-full gradient-brand border-0 text-white font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
+                  className="h-11 w-full gradient-brand border-0 text-foreground font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
                   size="lg"
                 >
                   {loading ? 'Signing in...' : 'Sign in'}
@@ -355,7 +355,7 @@ export default function LoginPage() {
               {/* Divider */}
               <motion.div variants={itemVariants} className="relative flex items-center gap-4 py-1">
                 <div className="h-px flex-1 bg-white/[0.08]" />
-                <span className="text-xs text-zinc-500 uppercase tracking-wider">or continue with</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">or continue with</span>
                 <div className="h-px flex-1 bg-white/[0.08]" />
               </motion.div>
 
@@ -363,7 +363,7 @@ export default function LoginPage() {
               <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
-                  className="h-11 border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-zinc-300 gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GoogleIcon />
@@ -371,7 +371,7 @@ export default function LoginPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="h-11 border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-zinc-300 gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GitHubIcon />
@@ -380,11 +380,11 @@ export default function LoginPage() {
               </motion.div>
 
               {/* Sign up link */}
-              <motion.p variants={itemVariants} className="text-center text-sm text-zinc-500 pt-2">
+              <motion.p variants={itemVariants} className="text-center text-sm text-muted-foreground pt-2">
                 Don&apos;t have an account?{' '}
                 <Link
                   href="/signup"
-                  className="text-[#7C3AED] hover:text-[#8B5CF6] font-medium transition-colors"
+                  className="text-[#10a37f] hover:text-[#12b78e] font-medium transition-colors"
                 >
                   Sign up
                 </Link>

@@ -11,6 +11,7 @@ import {
   Database,
   BarChart3,
   Settings,
+  Users,
   ChevronsLeft,
   ChevronsRight,
   Sparkles,
@@ -35,6 +36,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Database,
   BarChart3,
   Settings,
+  Users,
 };
 
 // ─── Animation Variants ─────────────────────────────────────────────────────
@@ -80,7 +82,7 @@ export function Sidebar() {
       {/* ── Logo ──────────────────────────────────────────────────────── */}
       <div className="flex h-14 items-center gap-2.5 border-b border-white/[0.06] px-4">
         <div className="flex size-8 shrink-0 items-center justify-center rounded-lg gradient-brand">
-          <Sparkles className="size-4 text-white" />
+          <Sparkles className="size-4 text-foreground" />
         </div>
         <AnimatePresence>
           {!sidebarCollapsed && (
@@ -106,10 +108,10 @@ export function Sidebar() {
               href={href}
               className={cn(
                 'group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
-                'hover:bg-white/[0.04]',
+                'hover:bg-muted/50',
                 isActive
-                  ? 'text-white'
-                  : 'text-[#71717A] hover:text-white/80'
+                  ? 'text-foreground'
+                  : 'text-[#71717A] hover:text-foreground/80'
               )}
             >
               {/* Active indicator pill */}
@@ -117,7 +119,7 @@ export function Sidebar() {
                 <motion.div
                   layoutId="sidebar-active-pill"
                   className="absolute inset-0 rounded-lg bg-white/[0.06]"
-                  style={{ borderLeft: '2px solid #7C3AED' }}
+                  style={{ borderLeft: '2px solid #10a37f' }}
                   transition={{
                     type: 'spring',
                     stiffness: 350,
@@ -129,7 +131,7 @@ export function Sidebar() {
               <Icon
                 className={cn(
                   'relative z-10 size-[18px] shrink-0 transition-colors duration-200',
-                  isActive ? 'text-[#7C3AED]' : 'text-[#71717A] group-hover:text-white/70'
+                  isActive ? 'text-[#10a37f]' : 'text-[#71717A] group-hover:text-foreground/70'
                 )}
               />
 
@@ -207,7 +209,7 @@ export function Sidebar() {
                 exit="hide"
                 transition={{ duration: 0.15 }}
               >
-                <span className="truncate text-sm font-medium text-white">
+                <span className="truncate text-sm font-medium text-foreground">
                   Alex Chen
                 </span>
                 <span className="truncate text-[11px] text-[#71717A]">
@@ -222,7 +224,7 @@ export function Sidebar() {
         <button
           onClick={toggleSidebar}
           className={cn(
-            'mt-1 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-[#71717A] transition-colors hover:bg-white/[0.04] hover:text-white/80',
+            'mt-1 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-[#71717A] transition-colors hover:bg-muted/50 hover:text-foreground/80',
             sidebarCollapsed && 'px-0'
           )}
         >
