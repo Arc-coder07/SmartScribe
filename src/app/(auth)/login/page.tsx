@@ -204,8 +204,8 @@ export default function LoginPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="glass-subtle rounded-2xl p-6 max-w-md">
-              <p className="text-sm text-muted-foreground leading-relaxed italic">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 max-w-md">
+              <p className="text-sm text-white/80 leading-relaxed italic">
                 &ldquo;SmartScribe has completely transformed how our team creates content. What used to take hours now takes minutes, with better quality than ever.&rdquo;
               </p>
               <div className="mt-4 flex items-center gap-3">
@@ -213,8 +213,8 @@ export default function LoginPage() {
                   SR
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Sarah Reynolds</p>
-                  <p className="text-xs text-muted-foreground">Head of Content, Vercel</p>
+                  <p className="text-sm font-medium text-white">Sarah Reynolds</p>
+                  <p className="text-xs text-white/60">Head of Content, Vercel</p>
                 </div>
               </div>
             </div>
@@ -316,8 +316,8 @@ export default function LoginPage() {
                   onClick={() => setRememberMe(!rememberMe)}
                   className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all ${
                     rememberMe
-                      ? 'border-[#10a37f] bg-[#10a37f]'
-                      : 'border-white/20 bg-muted/50 hover:border-white/30'
+                      ? 'border-brand bg-brand'
+                      : 'border-border bg-muted/50 hover:border-border/80'
                   }`}
                 >
                   {rememberMe && (
@@ -354,16 +354,16 @@ export default function LoginPage() {
 
               {/* Divider */}
               <motion.div variants={itemVariants} className="relative flex items-center gap-4 py-1">
-                <div className="h-px flex-1 bg-white/[0.08]" />
+                <div className="h-px flex-1 bg-border" />
                 <span className="text-xs text-muted-foreground uppercase tracking-wider">or continue with</span>
-                <div className="h-px flex-1 bg-white/[0.08]" />
+                <div className="h-px flex-1 bg-border" />
               </motion.div>
 
               {/* OAuth buttons */}
               <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
-                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-muted/50 text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GoogleIcon />
@@ -371,7 +371,7 @@ export default function LoginPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-muted/50 text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GitHubIcon />

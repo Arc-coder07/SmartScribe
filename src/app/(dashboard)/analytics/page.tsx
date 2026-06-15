@@ -42,7 +42,7 @@ const typeData = [
   { name: 'Invoices', value: 25, color: DOCUMENT_TYPE_META.invoice.color },
   { name: 'Contracts', value: 15, color: DOCUMENT_TYPE_META.contract.color },
   { name: 'Reports', value: 15, color: DOCUMENT_TYPE_META.report.color },
-  { name: 'Other', value: 10, color: '#71717A' },
+  { name: 'Other', value: 10, color: 'var(--color-muted-foreground)' },
 ];
 
 const healthTrend = [
@@ -65,7 +65,7 @@ const topTemplates = [
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string }>; label?: string }) => {
   if (!active || !payload) return null;
   return (
-    <div className="rounded-lg border border-border/50 bg-surface p-3 shadow-xl">
+    <div className="rounded-lg border border-border bg-card p-3 shadow-xl">
       <p className="text-xs font-medium text-foreground mb-1">{label}</p>
       {payload.map((item, i) => (
         <p key={i} className="text-xs text-muted-foreground">
@@ -108,7 +108,7 @@ export default function AnalyticsPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: i * 0.08 }}
-            className="p-4 rounded-xl glass"
+            className="p-4 rounded-xl bg-card border border-border shadow-sm"
           >
             <div className="flex items-center justify-between mb-3">
               <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${stat.color}15` }}>
@@ -132,7 +132,7 @@ export default function AnalyticsPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="lg:col-span-4 p-5 rounded-xl glass"
+          className="lg:col-span-4 p-5 rounded-xl bg-card border border-border shadow-sm"
         >
           <h3 className="text-sm font-medium mb-4">Document Creation Trend</h3>
           <div className="h-[240px]">
@@ -144,9 +144,9 @@ export default function AnalyticsPage() {
                     <stop offset="100%" stopColor="#10a37f" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                <XAxis dataKey="week" tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="week" tick={{ fontSize: 11, fill: 'var(--color-muted-foreground)' }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--color-muted-foreground)' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <Area type="monotone" dataKey="documents" name="Documents" stroke="#10a37f" fill="url(#docGradient)" strokeWidth={2} />
               </AreaChart>
@@ -159,7 +159,7 @@ export default function AnalyticsPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="lg:col-span-3 p-5 rounded-xl glass"
+          className="lg:col-span-3 p-5 rounded-xl bg-card border border-border shadow-sm"
         >
           <h3 className="text-sm font-medium mb-4">Documents by Type</h3>
           <div className="h-[180px]">
@@ -191,15 +191,15 @@ export default function AnalyticsPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.5 }}
-          className="p-5 rounded-xl glass"
+          className="p-5 rounded-xl bg-card border border-border shadow-sm"
         >
           <h3 className="text-sm font-medium mb-4">Health Score Trend</h3>
           <div className="h-[200px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={healthTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
-                <YAxis domain={[60, 100]} tick={{ fontSize: 11, fill: '#71717A' }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--color-muted-foreground)' }} axisLine={false} tickLine={false} />
+                <YAxis domain={[60, 100]} tick={{ fontSize: 11, fill: 'var(--color-muted-foreground)' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <Bar dataKey="score" name="Score" fill="#10B981" radius={[4, 4, 0, 0]} />
               </BarChart>
@@ -211,7 +211,7 @@ export default function AnalyticsPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.6 }}
-          className="p-5 rounded-xl glass"
+          className="p-5 rounded-xl bg-card border border-border shadow-sm"
         >
           <h3 className="text-sm font-medium mb-4">Top Templates</h3>
           <div className="space-y-3">

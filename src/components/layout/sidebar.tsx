@@ -72,7 +72,7 @@ export function Sidebar() {
   return (
     <motion.aside
       className={cn(
-        'relative flex h-screen flex-col border-r border-white/[0.06] bg-[#0a0a0c]',
+        'relative flex h-screen flex-col border-r border-border bg-background',
         'select-none'
       )}
       variants={sidebarVariants}
@@ -80,7 +80,7 @@ export function Sidebar() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       {/* ── Logo ──────────────────────────────────────────────────────── */}
-      <div className="flex h-14 items-center gap-2.5 border-b border-white/[0.06] px-4">
+      <div className="flex h-14 items-center gap-2.5 border-b border-border px-4">
         <div className="flex size-8 shrink-0 items-center justify-center rounded-lg gradient-brand">
           <Sparkles className="size-4 text-foreground" />
         </div>
@@ -111,15 +111,15 @@ export function Sidebar() {
                 'hover:bg-muted/50',
                 isActive
                   ? 'text-foreground'
-                  : 'text-[#71717A] hover:text-foreground/80'
+                  : 'text-muted-foreground hover:text-foreground/80'
               )}
             >
               {/* Active indicator pill */}
               {isActive && (
                 <motion.div
                   layoutId="sidebar-active-pill"
-                  className="absolute inset-0 rounded-lg bg-white/[0.06]"
-                  style={{ borderLeft: '2px solid #10a37f' }}
+                  className="absolute inset-0 rounded-lg bg-muted/50"
+                  style={{ borderLeft: '2px solid var(--color-brand)' }}
                   transition={{
                     type: 'spring',
                     stiffness: 350,
@@ -131,7 +131,7 @@ export function Sidebar() {
               <Icon
                 className={cn(
                   'relative z-10 size-[18px] shrink-0 transition-colors duration-200',
-                  isActive ? 'text-[#10a37f]' : 'text-[#71717A] group-hover:text-foreground/70'
+                  isActive ? 'text-brand' : 'text-muted-foreground group-hover:text-foreground/70'
                 )}
               />
 
@@ -154,7 +154,7 @@ export function Sidebar() {
               <AnimatePresence>
                 {!sidebarCollapsed && (
                   <motion.kbd
-                    className="relative z-10 hidden rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] text-[#71717A] lg:inline-block"
+                    className="relative z-10 hidden rounded bg-muted/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:inline-block"
                     variants={labelVariants}
                     initial="hide"
                     animate="show"
@@ -190,7 +190,7 @@ export function Sidebar() {
       </nav>
 
       {/* ── Bottom: User + Collapse Toggle ────────────────────────────── */}
-      <div className="border-t border-white/[0.06] p-3">
+      <div className="border-t border-border p-3">
         {/* User */}
         <div className="flex items-center gap-3 rounded-lg px-3 py-2">
           <Avatar size="sm">
@@ -212,7 +212,7 @@ export function Sidebar() {
                 <span className="truncate text-sm font-medium text-foreground">
                   Alex Chen
                 </span>
-                <span className="truncate text-[11px] text-[#71717A]">
+                <span className="truncate text-[11px] text-muted-foreground">
                   Pro Plan
                 </span>
               </motion.div>
@@ -224,7 +224,7 @@ export function Sidebar() {
         <button
           onClick={toggleSidebar}
           className={cn(
-            'mt-1 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-[#71717A] transition-colors hover:bg-muted/50 hover:text-foreground/80',
+            'mt-1 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground/80',
             sidebarCollapsed && 'px-0'
           )}
         >

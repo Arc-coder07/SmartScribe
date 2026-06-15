@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { formatDistanceToNow } from 'date-fns';
 import {
@@ -10,19 +11,21 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowRight,
+  FileText
 } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
 import type { ActivityItem } from '@/lib/types';
 
 // ─── Activity Type Config ───────────────────────────────────────────────────
 
 const activityTypeConfig: Record<
-  ActivityItem['type'],
+  string,
   { icon: typeof FilePlus; color: string; dotColor: string }
 > = {
   created: {
     icon: FilePlus,
     color: '#10a37f',
-    dotColor: 'bg-purple-500',
+    dotColor: 'bg-brand',
   },
   edited: {
     icon: Pencil,
@@ -49,78 +52,12 @@ const activityTypeConfig: Record<
     color: '#10B981',
     dotColor: 'bg-emerald-500',
   },
+  default: {
+    icon: FileText,
+    color: '#71717A',
+    dotColor: 'bg-zinc-500',
+  }
 };
-
-// ─── Mock Data ──────────────────────────────────────────────────────────────
-
-const now = new Date();
-
-const mockActivities: ActivityItem[] = [
-  {
-    id: '1',
-    type: 'ai-generated',
-    title: 'Q3 Marketing Proposal',
-    description: 'AI generated a new marketing proposal for Acme Corp',
-    user: { id: 'u1', name: 'Alex', email: 'alex@smartscribe.ai', role: 'owner' },
-    timestamp: new Date(now.getTime() - 12 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '2',
-    type: 'edited',
-    title: 'Website Redesign Contract',
-    description: 'Updated payment terms in the website redesign contract',
-    user: { id: 'u1', name: 'Alex', email: 'alex@smartscribe.ai', role: 'owner' },
-    timestamp: new Date(now.getTime() - 45 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '3',
-    type: 'approved',
-    title: 'Annual Report 2024',
-    description: 'Annual report was approved and finalized',
-    user: { id: 'u2', name: 'Sarah', email: 'sarah@smartscribe.ai', role: 'admin' },
-    timestamp: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '4',
-    type: 'commented',
-    title: 'Client Onboarding SOP',
-    description: 'Sarah left a comment on the onboarding document',
-    user: { id: 'u2', name: 'Sarah', email: 'sarah@smartscribe.ai', role: 'admin' },
-    timestamp: new Date(now.getTime() - 3 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '5',
-    type: 'created',
-    title: 'Invoice #1042',
-    description: 'Created a new invoice for GlobalTech Solutions',
-    user: { id: 'u1', name: 'Alex', email: 'alex@smartscribe.ai', role: 'owner' },
-    timestamp: new Date(now.getTime() - 5 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '6',
-    type: 'exported',
-    title: 'Partnership Agreement',
-    description: 'Exported partnership agreement as PDF',
-    user: { id: 'u1', name: 'Alex', email: 'alex@smartscribe.ai', role: 'owner' },
-    timestamp: new Date(now.getTime() - 8 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '7',
-    type: 'ai-generated',
-    title: 'Meeting Summary — Sprint Review',
-    description: 'AI summarized the sprint review meeting notes',
-    user: { id: 'u1', name: 'Alex', email: 'alex@smartscribe.ai', role: 'owner' },
-    timestamp: new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: '8',
-    type: 'edited',
-    title: 'Business Plan v2',
-    description: 'Updated financial projections section',
-    user: { id: 'u3', name: 'Mike', email: 'mike@smartscribe.ai', role: 'editor' },
-    timestamp: new Date(now.getTime() - 36 * 60 * 60 * 1000).toISOString(),
-  },
-];
 
 // ─── Animation ──────────────────────────────────────────────────────────────
 
@@ -147,10 +84,45 @@ const itemVariants = {
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export function RecentActivity() {
+  const [activities, setActivities] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function loadActivities() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: docs } = await supabase
+        .from('documents')
+        .select('id, title, created_at, updated_at, type')
+        .eq('user_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(8);
+
+      if (docs) {
+        const mappedActivities = docs.map((doc) => {
+          const isEdited = doc.updated_at !== doc.created_at;
+          return {
+            id: doc.id,
+            type: isEdited ? 'edited' : 'created',
+            title: doc.title || 'Untitled Document',
+            description: isEdited 
+              ? `Updated document "${doc.title || 'Untitled'}"`
+              : `Created new document "${doc.title || 'Untitled'}"`,
+            user: { name: 'You' }, // Since it's their own document
+            timestamp: doc.updated_at || doc.created_at,
+          };
+        });
+        setActivities(mappedActivities);
+      }
+    }
+    loadActivities();
+  }, []);
+
   return (
-    <div className="glass rounded-xl">
+    <div className="rounded-xl bg-card border border-border shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
+      <div className="flex items-center justify-between border-b border-border px-5 py-4">
         <h3 className="text-sm font-semibold text-foreground">Recent Activity</h3>
         <button className="group flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
           View All
@@ -160,13 +132,13 @@ export function RecentActivity() {
 
       {/* Activity List */}
       <motion.div
-        className="divide-y divide-white/[0.04]"
+        className="divide-y divide-border"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {mockActivities.map((activity) => {
-          const config = activityTypeConfig[activity.type];
+        {activities.length > 0 ? activities.map((activity) => {
+          const config = activityTypeConfig[activity.type] || activityTypeConfig.default;
           const Icon = config.icon;
 
           return (
@@ -205,7 +177,11 @@ export function RecentActivity() {
               </div>
             </motion.div>
           );
-        })}
+        }) : (
+          <div className="px-5 py-8 text-center text-sm text-muted-foreground">
+            No recent activity
+          </div>
+        )}
       </motion.div>
     </div>
   );

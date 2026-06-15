@@ -22,27 +22,15 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import type { AIMessage, HealthSuggestion, HealthScore } from '@/lib/types';
 
-// ─── Mock Data ──────────────────────────────────────────────────────────────
+// ─── Initial AI Message ───────────────────────────────────────────────────────
 
-const MOCK_MESSAGES: AIMessage[] = [
+const INITIAL_MESSAGES: AIMessage[] = [
   {
     id: '1',
     role: 'assistant',
     content: 'Hi! I\'m your SmartScribe AI copilot. I can help you draft, refine, and optimize your business documents. What are you working on today?',
-    timestamp: new Date(Date.now() - 300000).toISOString(),
-  },
-  {
-    id: '2',
-    role: 'user',
-    content: 'I need help improving the executive summary of my proposal.',
-    timestamp: new Date(Date.now() - 240000).toISOString(),
-  },
-  {
-    id: '3',
-    role: 'assistant',
-    content: 'I\'d be happy to help! I noticed your executive summary could be stronger. Consider leading with the client\'s pain point, then your unique solution. Shall I suggest a rewrite?',
-    timestamp: new Date(Date.now() - 180000).toISOString(),
-  },
+    timestamp: new Date().toISOString(),
+  }
 ];
 
 
@@ -84,14 +72,14 @@ export function CopilotPanel() {
     <AnimatePresence>
       {copilotOpen && (
         <motion.aside
-          className="flex h-screen w-[360px] shrink-0 flex-col border-l border-white/[0.06] bg-[#0a0a0c]"
+          className="flex h-screen w-[360px] shrink-0 flex-col border-l border-border bg-background"
           variants={panelVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
           {/* ── Header ─────────────────────────────────────────────── */}
-          <div className="flex h-14 items-center justify-between border-b border-white/[0.06] px-4">
+          <div className="flex h-14 items-center justify-between border-b border-border px-4">
             <div className="flex items-center gap-2">
               <div className="flex size-7 items-center justify-center rounded-md gradient-brand">
                 <Sparkles className="size-3.5 text-foreground" />
@@ -102,7 +90,7 @@ export function CopilotPanel() {
             </div>
             <button
               onClick={toggleCopilot}
-              className="flex size-7 items-center justify-center rounded-md text-[#71717A] transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              className="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
             >
               <X className="size-4" />
             </button>
@@ -149,7 +137,7 @@ export function CopilotPanel() {
 // ─── Chat Tab ───────────────────────────────────────────────────────────────
 
 function ChatTab() {
-  const [messages, setMessages] = useState<AIMessage[]>([]);
+  const [messages, setMessages] = useState<AIMessage[]>(INITIAL_MESSAGES);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -252,7 +240,7 @@ function ChatTab() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-white/[0.04] p-4 bg-background">
+      <div className="border-t border-border p-4 bg-background">
         <form onSubmit={handleSubmit} className="relative">
           <Input
             value={input}
@@ -313,7 +301,7 @@ function SuggestionsTab() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="group rounded-xl border border-white/[0.06] bg-muted/30 p-3.5 transition-colors hover:bg-muted/50"
+            className="group rounded-xl border border-border bg-muted/30 p-3.5 transition-colors hover:bg-muted/50"
             style={{ borderLeftWidth: 3, borderLeftColor: meta.color }}
           >
             {/* Header */}
@@ -331,7 +319,7 @@ function SuggestionsTab() {
                 <h4 className="text-sm font-medium text-foreground capitalize">
                   {suggestion.category} Suggestion
                 </h4>
-                <p className="mt-0.5 text-xs leading-relaxed text-[#71717A]">
+                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
                   {suggestion.message}
                 </p>
               </div>
@@ -348,7 +336,7 @@ function SuggestionsTab() {
               </button>
               <button
                 onClick={() => handleDismiss(suggestion.id)}
-                className="flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-[#71717A] transition-colors hover:bg-muted/50 hover:text-foreground/70"
+                className="flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground/70"
               >
                 <XIcon className="size-3" />
                 Dismiss
@@ -426,7 +414,7 @@ function HealthTab() {
               cy="64"
               r={radius}
               fill="none"
-              stroke="rgba(255,255,255,0.06)"
+              stroke="var(--color-border)"
               strokeWidth="8"
             />
             {/* Progress circle */}
@@ -454,7 +442,7 @@ function HealthTab() {
             >
               {health.overall}
             </motion.span>
-            <span className="text-[11px] text-[#71717A]">Health Score</span>
+            <span className="text-[11px] text-muted-foreground">Health Score</span>
           </div>
         </div>
       </div>
@@ -475,7 +463,7 @@ function HealthTab() {
                 {score}
               </span>
             </div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="h-1.5 overflow-hidden rounded-full bg-border">
               <motion.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: getHealthColor(score) }}

@@ -118,7 +118,7 @@ export function QuickActions() {
                 boxShadow: `0 4px 20px ${meta.color}20`,
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative flex items-center gap-3 overflow-hidden rounded-xl border border-white/[0.06] bg-surface p-4 text-left transition-colors hover:bg-surface-hover"
+              className="group relative flex items-center gap-3 overflow-hidden rounded-xl border border-border bg-card p-4 text-left transition-colors hover:bg-muted/50"
             >
               {/* Colored left border accent */}
               <div

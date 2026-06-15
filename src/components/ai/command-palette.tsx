@@ -128,7 +128,7 @@ export function CommandPalette() {
                     className="flex-1 h-12 bg-transparent text-sm text-foreground placeholder:text-[#71717A] outline-none"
                     autoFocus
                   />
-                  <kbd className="hidden sm:flex h-5 items-center rounded bg-white/[0.06] px-1.5 font-mono text-[10px] text-[#71717A]">
+                  <kbd className="hidden sm:flex h-5 items-center rounded bg-muted/50 px-1.5 font-mono text-[10px] text-muted-foreground">
                     ESC
                   </kbd>
                 </div>
@@ -143,18 +143,18 @@ export function CommandPalette() {
                     <Command.Group
                       key={group.heading}
                       heading={group.heading}
-                      className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-[#71717A] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider"
+                      className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider"
                     >
                       {group.items.map((item) => (
                         <Command.Item
                           key={item.label}
                           onSelect={item.onSelect}
-                          className="flex items-center gap-3 px-2 py-2.5 rounded-lg text-sm text-foreground/80 cursor-pointer transition-colors aria-selected:bg-white/[0.06] aria-selected:text-foreground hover:bg-muted/50"
+                          className="flex items-center gap-3 px-2 py-2.5 rounded-lg text-sm text-foreground/80 cursor-pointer transition-colors aria-selected:bg-muted/50 aria-selected:text-foreground hover:bg-muted/50"
                         >
-                          <item.icon className="h-4 w-4 text-[#71717A]" />
+                          <item.icon className="h-4 w-4 text-muted-foreground" />
                           <span className="flex-1">{item.label}</span>
                           {item.shortcut && (
-                            <kbd className="rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] text-[#71717A]">
+                            <kbd className="rounded bg-muted/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                               {item.shortcut}
                             </kbd>
                           )}
@@ -165,14 +165,14 @@ export function CommandPalette() {
                 </Command.List>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between border-t border-white/[0.06] px-4 py-2">
-                  <div className="flex items-center gap-2 text-[11px] text-[#71717A]">
-                    <kbd className="rounded bg-white/[0.06] px-1 py-0.5 font-mono text-[9px]">↑↓</kbd>
+                <div className="flex items-center justify-between border-t border-border px-4 py-2">
+                  <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+                    <kbd className="rounded bg-muted/50 px-1 py-0.5 font-mono text-[9px]">↑↓</kbd>
                     <span>Navigate</span>
-                    <kbd className="rounded bg-white/[0.06] px-1 py-0.5 font-mono text-[9px] ml-2">↵</kbd>
+                    <kbd className="rounded bg-muted/50 px-1 py-0.5 font-mono text-[9px] ml-2">↵</kbd>
                     <span>Select</span>
                   </div>
-                  <div className="flex items-center gap-1 text-[11px] text-[#71717A]">
+                  <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
                     <Sparkles className="h-3 w-3" />
                     SmartScribe
                   </div>

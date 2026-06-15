@@ -214,19 +214,19 @@ export default function SignupPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="glass-subtle rounded-2xl p-6 max-w-md">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 max-w-md">
               <div className="grid grid-cols-3 gap-6">
                 <div>
-                  <p className="text-2xl font-bold text-foreground">50K+</p>
-                  <p className="text-xs text-muted-foreground mt-1">Active writers</p>
+                  <p className="text-2xl font-bold text-white">50K+</p>
+                  <p className="text-xs text-white/60 mt-1">Active writers</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">2M+</p>
-                  <p className="text-xs text-muted-foreground mt-1">Documents created</p>
+                  <p className="text-2xl font-bold text-white">2M+</p>
+                  <p className="text-xs text-white/60 mt-1">Documents created</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">99.9%</p>
-                  <p className="text-xs text-muted-foreground mt-1">Uptime</p>
+                  <p className="text-2xl font-bold text-white">99.9%</p>
+                  <p className="text-xs text-white/60 mt-1">Uptime</p>
                 </div>
               </div>
             </div>
@@ -383,16 +383,16 @@ export default function SignupPage() {
 
               {/* Divider */}
               <motion.div variants={itemVariants} className="relative flex items-center gap-4 py-1">
-                <div className="h-px flex-1 bg-white/[0.08]" />
+                <div className="h-px flex-1 bg-border" />
                 <span className="text-xs text-muted-foreground uppercase tracking-wider">or continue with</span>
-                <div className="h-px flex-1 bg-white/[0.08]" />
+                <div className="h-px flex-1 bg-border" />
               </motion.div>
 
               {/* OAuth buttons */}
               <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
-                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-muted/50 text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GoogleIcon />
@@ -400,7 +400,7 @@ export default function SignupPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="h-11 border-border bg-muted/30 hover:bg-white/[0.06] text-muted-foreground gap-2 cursor-pointer"
+                  className="h-11 border-border bg-muted/30 hover:bg-muted/50 text-muted-foreground gap-2 cursor-pointer"
                   size="lg"
                 >
                   <GitHubIcon />
