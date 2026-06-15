@@ -40,11 +40,11 @@ const floatingShapeStyles = `
 `;
 
 const shapes = [
-  { className: 'w-72 h-72 rounded-full', style: { top: '10%', left: '15%', animation: 'float-1 20s ease-in-out infinite', background: 'rgba(124, 58, 237, 0.08)' } },
+  { className: 'w-72 h-72 rounded-full', style: { top: '10%', left: '15%', animation: 'float-1 20s ease-in-out infinite', background: 'rgba(16, 163, 127, 0.08)' } },
   { className: 'w-48 h-48 rounded-2xl', style: { top: '55%', left: '60%', animation: 'float-2 25s ease-in-out infinite', background: 'rgba(59, 130, 246, 0.08)', transform: 'rotate(45deg)' } },
-  { className: 'w-36 h-36 rounded-full', style: { top: '70%', left: '20%', animation: 'float-3 18s ease-in-out infinite', background: 'rgba(124, 58, 237, 0.06)' } },
+  { className: 'w-36 h-36 rounded-full', style: { top: '70%', left: '20%', animation: 'float-3 18s ease-in-out infinite', background: 'rgba(16, 163, 127, 0.06)' } },
   { className: 'w-56 h-56 rounded-3xl', style: { top: '20%', left: '55%', animation: 'float-4 22s ease-in-out infinite', background: 'rgba(59, 130, 246, 0.06)', transform: 'rotate(15deg)' } },
-  { className: 'w-24 h-24 rounded-full', style: { top: '40%', left: '35%', animation: 'float-1 15s ease-in-out infinite reverse', background: 'rgba(124, 58, 237, 0.1)' } },
+  { className: 'w-24 h-24 rounded-full', style: { top: '40%', left: '35%', animation: 'float-1 15s ease-in-out infinite reverse', background: 'rgba(16, 163, 127, 0.1)' } },
   { className: 'w-16 h-16 rounded-lg', style: { top: '15%', left: '75%', animation: 'float-2 17s ease-in-out infinite reverse', background: 'rgba(59, 130, 246, 0.1)', transform: 'rotate(30deg)' } },
 ];
 
@@ -147,7 +147,7 @@ export default function LoginPage() {
           <div
             className="absolute inset-0 opacity-30"
             style={{
-              background: 'radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%), radial-gradient(ellipse at 50% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 60%)',
+              background: 'radial-gradient(ellipse at 20% 50%, rgba(16, 163, 127, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%), radial-gradient(ellipse at 50% 80%, rgba(16, 163, 127, 0.08) 0%, transparent 60%)',
             }}
           />
 
